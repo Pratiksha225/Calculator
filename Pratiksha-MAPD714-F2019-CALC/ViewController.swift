@@ -1,76 +1,77 @@
-
-// NAME:
-// STUDENTID:
-// DESCRIPTION:
-// DATE:
-// VERSION HISTORY: v1 - added functionality for buttons
+//Name: Pratiksha Kathiriya
+//StudentId: 301093309
+//Description: Application which performs +,-,×,÷ on two or more operands
+//Date: 2nd Oct,19.
+//Version History: v2- added functionality for buttons
 import UIKit
 
-class ViewController: UIViewController {
-    
-    // Private Instance Variables
+class ViewController: UIViewController
+{
+
     private var m_operand = "0"
-    private var m_currentValue: Double = 0.0
+    private var m_currentValue = 0.0
     private var m_currentOperation = Operation.none
+    @IBOutlet weak var Result: UILabel!
     
-    // Outlets
-    @IBOutlet weak var resultLabel: UILabel!
-    
-    // Life Cycle Functions
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        resultLabel.text = "0"
+        Result.text = "0"
     }
     
-    // Actions
-    @IBAction func CalculatorButtonClick(_ sender: UIButton) {
+    @IBAction func onClick(_ sender: UIButton)
+    {
         var calculatorButton = sender.titleLabel?.text
         
         switch(calculatorButton)
         {
         case "AC":
             m_operand = "0"
-            m_currentValue = 0.0
-            resultLabel.text = m_operand
+            m_currentValue=0.0
+            Result.text = m_operand
             break
+            
         case ".":
-            if(!(resultLabel.text?.contains("."))!)
+            if(!(Result.text?.contains("."))!)
             {
                 m_operand += calculatorButton!
             }
-            break
+            
         case "+":
             m_currentOperation = Operation.add
             m_currentValue += Double(m_operand) as! Double
             m_operand = "0"
-            resultLabel.text = String(m_currentValue)
+            Result.text = String(m_currentValue)
             break
+            
         case "-":
-            // needs correction - subtracts wrong in a compound operation
+            m_currentOperation = Operation.subtract
             m_currentValue -= Double(m_operand) as! Double
             m_operand = "0"
-            resultLabel.text = String(m_currentValue)
+            Result.text = String(m_currentValue)
             break
-        case "x":
+            
+        case "×":
             break
         case "÷":
             break
         case "=":
+            
             // complete the last operation
-            resultLabel.text = String(m_currentValue)
+            Result.text = String(m_currentValue)
             break
-        case "⇦":
+        case "←":
             m_operand = String(m_operand.dropLast())
             if(m_operand.count == 0)
             {
                 m_operand = "0"
             }
-            resultLabel.text = m_operand
+            Result.text = m_operand
             break
         case "+/-":
             break
-        default:
             
+        default:
             
             if(m_operand == "0")
             {
@@ -96,9 +97,11 @@ class ViewController: UIViewController {
                 }
             }
             
-            resultLabel.text = m_operand
+            Result.text = m_operand
         }
         
     }
-    
+
+
 }
+
